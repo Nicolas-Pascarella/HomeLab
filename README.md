@@ -1,5 +1,5 @@
 
-# Main HomeLab — Enterprise Linux & Hybrid Cloud Infrastructure
+# HomeLab — Linux & Hybrid Cloud Infrastructure
 
 > A hands-on enterprise-style infrastructure environment built to develop and demonstrate practical skills in Linux administration, networking, automation, security, observability, backup and recovery, and AWS hybrid cloud technologies.
 
@@ -13,9 +13,9 @@
 
 Main HomeLab is a multi-phase infrastructure project designed to simulate many of the technologies, operational practices, and troubleshooting scenarios encountered in enterprise IT environments.
 
-The environment combines physical networking equipment, Linux servers, centralized administration, infrastructure automation, monitoring and logging, network segmentation, backup services, and AWS cloud resources into a single integrated lab.
+The environment combines physical networking equipment, Linux servers, centralized administration, network segmentation, and AWS cloud resources into a single integrated lab.
 
-Rather than focusing on isolated exercises, the project was built incrementally as an interconnected environment in which networking, Linux administration, security, automation, observability, and cloud infrastructure depend on one another.
+Rather than focusing on isolated exercises, the project was built incrementally as an interconnected environment in which networking, Linux administration, and cloud infrastructure depend on one another.
 
 ## Architecture
 
@@ -49,29 +49,6 @@ Each case study includes implementation details, validation evidence, and troubl
 ### Linux Administration & Automation
 
 - Rocky Linux server administration
-- Ansible configuration management
-- Role-based inventory organization
-- Automated patch management
-- systemd services and timers
-- NFS administration
-- Backup and recovery automation
-
-### Monitoring & Logging
-
-- Grafana
-- Prometheus
-- Alertmanager
-- Node Exporter
-- Loki
-- Grafana Alloy
-- Centralized infrastructure dashboards
-- Metrics, logs, service-health monitoring, and alerting
-
-#### Monitoring & Logging Architecture
-
-![Main HomeLab Monitoring and Logging Architecture](monitoring-logging-architecture.png)
-
-*Centralized observability architecture for the Main HomeLab. Prometheus on server01 collects infrastructure metrics from Node Exporter, Grafana provides visualization, Alertmanager handles alerting, and Grafana Alloy forwards system logs from server01 and server02 to Loki for centralized log analysis.*
 
 ### AWS Hybrid Cloud
 
@@ -138,8 +115,6 @@ Detailed documentation and implementation evidence are available throughout this
 
 - Network architecture and security
 - Linux administration
-- Ansible automation
-- Monitoring and centralized logging
 - Backup and recovery
 - AWS hybrid-cloud architecture
 - Troubleshooting case studies
