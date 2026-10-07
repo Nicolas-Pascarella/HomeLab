@@ -195,4 +195,4 @@ This HomeLab provides hands-on experience with:
 
 The purpose of this HomeLab is to build practical experience that complements my technical studies and demonstrates my ability to configure, troubleshoot, and document real systems.
 
-The repository will continue to contain documentation from completed lab exercises and infrastructure projects that demonstrate skills relevant to entry-level Linux System Administrator, IT Infrastructure, Network Support, and IT Support roles.
+This home lab will serve as the foundation for all future projects, allowing me to learn and practice new technologies in a controlled environment 
