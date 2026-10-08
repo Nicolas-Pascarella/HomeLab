@@ -2,17 +2,17 @@
 
 ## Overview
 
-This repository documents my hands-on enterprise-style HomeLab built to develop practical skills in Linux system administration, networking, security, and cloud infrastructure.
+This repository documents my hands-on HomeLab built to develop practical skills in Linux system administration, networking, security, virtualization, and cloud infrastructure.
 
-The environment was built using physical Cisco networking equipment, Dell OptiPlex systems, a Raspberry Pi, VMware virtual machines, pfSense, Rocky Linux, and AWS.
+The environment combines physical Cisco networking equipment, pfSense, Rocky Linux, VMware Workstation, Dell OptiPlex systems, a Raspberry Pi, and AWS resources.
 
-The goal of this project was not simply to install technologies, but to configure, test, troubleshoot, and document an environment that reflects many of the technologies and administrative tasks encountered in real IT infrastructure.
+The goal of the HomeLab is to gain practical experience by configuring, testing, troubleshooting, securing, and documenting infrastructure rather than relying only on theoretical study.
 
 ---
 
 ## HomeLab Architecture
 
-The lab includes:
+The environment includes:
 
 - Cisco Catalyst 3850 Layer 3 core switch
 - Cisco Catalyst 3750 access switch
@@ -20,11 +20,13 @@ The lab includes:
 - Dell OptiPlex 3040
 - Dell OptiPlex 7040
 - Raspberry Pi 5
-- Rocky Linux servers
-- VMware Workstation virtual machines
+- Rocky Linux virtual machines
+- VMware Workstation
 - AWS cloud resources
 
-The network is segmented using multiple VLANs for management, servers, clients, storage, DMZ systems, and other infrastructure.
+The Cisco Catalyst 3850 provides Layer 3 routing for internal networks, while the Catalyst 3750 provides access-layer switching.
+
+pfSense operates as the firewall and upstream routing boundary for the HomeLab.
 
 ---
 
@@ -40,92 +42,141 @@ The network is segmented using multiple VLANs for management, servers, clients, 
 | 60 | Additional Services |
 | 99 | Native VLAN |
 
-The Cisco Catalyst 3850 provides Layer 3 routing between VLANs while the Catalyst 3750 operates as an access-layer switch.
+The network uses VLAN segmentation to separate infrastructure based on function.
 
-802.1Q trunk links carry the required VLANs between network devices.
+802.1Q trunks transport the required VLANs between switches, while Switch Virtual Interfaces (SVIs) on the Cisco Catalyst 3850 provide Layer 3 connectivity between VLANs.
 
----
-
-## Projects & Documentation
-
-### Linux User Management Roadmap
-
-A structured Linux administration project focused on managing users, groups, permissions, shared resources, password policies, and administrative privileges on Rocky Linux.
-
-Topics include:
-
-- Linux user creation and lifecycle management
-- UID and GID management
-- Password aging policies
-- Account locking and unlocking
-- Primary and supplementary groups
-- Shared departmental directories
-- Linux file permissions
-- setgid directories
-- Sticky bit behavior
-- Sudo and privilege management
-- SSH administration
-- Troubleshooting and validation exercises
-
-Each phase includes hands-on configuration, testing, troubleshooting, and documentation.
+Traffic between network segments can be controlled using Layer 3 access control policies.
 
 ---
 
-### Enterprise Network Infrastructure
+# Projects & Documentation
+
+The following sections contain configuration details, troubleshooting notes, and verification evidence from the HomeLab.
+
+## 01 — Enterprise Network Infrastructure
+
+[View Network Infrastructure Documentation](01-Network-Infrastructure/README.md)
 
 Built and configured a segmented physical network using Cisco Catalyst switches.
 
-Skills demonstrated include:
+### Skills Demonstrated
 
 - VLAN configuration
 - 802.1Q trunking
+- Access and trunk ports
 - Switch Virtual Interfaces (SVIs)
 - Layer 3 switching
 - Inter-VLAN routing
-- Access port configuration
+- Static and default routing
+- Extended access control lists
 - Network segmentation
 - Spanning Tree verification
-- Routing configuration
-- Connectivity troubleshooting
+- Cisco IOS troubleshooting
+- Connectivity validation
+
+The documentation includes Cisco command output verifying trunk operation, Layer 3 routing, and VLAN access-control policies.
 
 ---
 
-### pfSense Firewall & Routing
+## 02 — pfSense Firewall & Routing
 
-Configured pfSense as the firewall and routing boundary between the HomeLab and external networks.
+[View pfSense Firewall Documentation](02-pfSense-Firewall/README.md)
 
-Tasks included:
+Configured pfSense as the firewall and routing boundary between the internal HomeLab infrastructure and the upstream network.
 
-- WAN and LAN configuration
-- Firewall rules
+### Skills Demonstrated
+
+- WAN and LAN interface configuration
+- IPv4 addressing and subnetting
+- `/30` routed transit networking
 - Static routing
-- Network segmentation
+- Default routing
+- Firewall policy
 - Management access
-- Connectivity testing
-- Troubleshooting routing and firewall policies
+- Cisco-to-pfSense integration
+- Connectivity troubleshooting
+- Routing validation
+
+The Cisco Catalyst 3850 and pfSense are connected through the `10.255.255.0/30` transit network.
+
+The documentation includes verification of pfSense interface addressing and static routes to the internal VLAN networks.
 
 ---
 
-### Linux Infrastructure
+## 03 — Linux User Management Roadmap
 
-Deployed Rocky Linux systems to practice common Linux administration responsibilities.
+[View Linux User Management Documentation](03-Linux-User-Management/README.md)
 
-Areas of practice include:
+A structured Rocky Linux administration project focused on identity, permissions, access control, and least-privilege administration.
 
-- Linux installation and configuration
-- SSH administration
-- User and group management
-- File ownership and permissions
-- Service management with systemd
-- Network configuration
-- Storage and shared resources
-- Command-line troubleshooting
+The project progresses through six completed phases:
+
+### Phase 1 — User Account Administration
+
+- User creation and deletion
+- UID and GID management
+- Password configuration
+- Password-aging policies
+- Account locking and unlocking
+- Account lifecycle management
+
+### Phase 2 — Groups & Membership
+
+- Primary and supplementary groups
+- Department groups
+- Group membership management
+- Group renaming
+- GID persistence
+- Group troubleshooting
+
+### Phase 3 — Shared Team Directories
+
+- Departmental shared resources
+- Group ownership
+- setgid directories
+- Sticky bit behavior
+- Permission inheritance
+- Collaborative access
+
+### Phase 4 — Linux File Permissions
+
+- Symbolic and octal permissions
+- File and directory permissions
+- `chmod`, `chown`, and `chgrp`
+- Sensitive-file protection
+- Executable permissions
+- Least-privilege filesystem design
+
+### Phase 5 — POSIX ACLs
+
+- Named-user ACLs
+- Named-group ACLs
+- ACL masks
+- Default ACLs
+- ACL inheritance
+- Cross-team access control
+
+### Phase 6 — Sudo & Delegated Administration
+
+- `/etc/sudoers.d`
+- `visudo`
+- Command-specific sudo delegation
+- Administrative groups
+- Allowed and denied command testing
+- Least-privilege administrative access
+
+### Phase 7 — Final Enterprise Challenge
+
+**Status: Planned**
+
+The Linux documentation includes terminal-based verification for each completed phase, including account configuration, group membership, shared directories, permissions, ACLs, and sudo authorization testing.
 
 ---
 
-### AWS Cloud Infrastructure
+## AWS Cloud Infrastructure
 
-Extended the lab into AWS to gain hands-on experience with cloud infrastructure concepts.
+The HomeLab was also extended into AWS to gain introductory hands-on experience with cloud infrastructure concepts.
 
 Areas explored include:
 
@@ -138,9 +189,11 @@ Areas explored include:
 - IAM concepts
 - Cloud networking concepts
 
+AWS is included as a supporting component of the overall infrastructure lab while the primary focus of this repository remains Linux administration and networking.
+
 ---
 
-## Hardware
+# Hardware
 
 | Device | Role |
 |--------|------|
@@ -152,47 +205,84 @@ Areas explored include:
 
 ---
 
-## Technologies
+# Technologies
 
-**Linux**
+### Linux
 
-Rocky Linux • Bash • SSH • systemd • Linux Permissions • User & Group Administration
+Rocky Linux • Bash • SSH • systemd • Linux Permissions • POSIX ACLs • Sudo • User & Group Administration
 
-**Networking**
+### Networking
 
-Cisco IOS • VLANs • 802.1Q • Layer 3 Switching • Inter-VLAN Routing • TCP/IP • Static Routing • Spanning Tree
+Cisco IOS / IOS XE • VLANs • 802.1Q • SVIs • Layer 3 Switching • Inter-VLAN Routing • TCP/IP • Static Routing • Spanning Tree • ACLs
 
-**Security**
+### Security
 
-pfSense • Firewall Rules • Network Segmentation • SSH • Linux Permissions • Sudo
+pfSense • Firewall Rules • Network Segmentation • Cisco ACLs • SSH • Linux Permissions • POSIX ACLs • Least-Privilege Sudo
 
-**Virtualization & Cloud**
+### Virtualization & Cloud
 
 VMware Workstation • AWS • EC2 • VPC • IAM
 
 ---
 
-## Skills Demonstrated
+# Skills Demonstrated
 
 This HomeLab provides hands-on experience with:
 
 - Linux system administration
 - User and group administration
+- Password and account policies
 - Linux permissions and access control
+- POSIX ACL administration
+- Sudo and least-privilege delegation
+- SSH and remote administration
 - Cisco switching and routing
 - VLAN design and network segmentation
+- Inter-VLAN routing
+- Network access control
 - Firewall configuration
+- Static and default routing
 - TCP/IP networking
-- SSH and remote administration
-- System troubleshooting
+- System and network troubleshooting
 - Virtualization
 - Basic AWS infrastructure
 - Technical documentation
+- Configuration testing and validation
 
 ---
 
-## Project Goal
+# Troubleshooting & Validation
 
-The purpose of this HomeLab is to build practical experience that complements my technical studies and demonstrates my ability to configure, troubleshoot, and document real systems.
+Configuration changes throughout the HomeLab are tested and verified rather than assumed to be successful.
 
-This home lab will serve as the foundation for all future projects, allowing me to learn and practice new technologies in a controlled environment 
+Examples include:
+
+- Verifying Cisco trunks and allowed VLANs
+- Inspecting Layer 3 routing tables
+- Testing inter-VLAN connectivity
+- Validating network ACL behavior
+- Verifying pfSense interfaces and static routes
+- Inspecting Linux user and group databases
+- Validating password-aging policies
+- Testing filesystem permissions
+- Inspecting POSIX ACLs
+- Testing authorized and unauthorized sudo commands
+- Verifying Linux service state
+
+Troubleshooting results and final-state verification are documented alongside the relevant configurations.
+
+---
+
+# Project Goal
+
+The purpose of this HomeLab is to build practical experience that complements my technical studies and demonstrates my ability to configure, secure, troubleshoot, verify, and document real systems.
+
+The repository is designed to demonstrate skills relevant to entry-level roles including:
+
+- Linux System Administration
+- IT Infrastructure
+- Network Support
+- Systems Support
+- Technical Support
+
+The HomeLab will continue to serve as a controlled environment for developing and validating new infrastructure skills.
