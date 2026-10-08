@@ -174,23 +174,33 @@ The Linux documentation includes terminal-based verification for each completed 
 
 ---
 
-## AWS Cloud Infrastructure
+## 04 — AWS Cloud Infrastructure
 
-The HomeLab was also extended into AWS to gain introductory hands-on experience with cloud infrastructure concepts.
+[View AWS Cloud Infrastructure Documentation](04-AWS-Cloud-Infrastructure/README.md)
 
-Areas explored include:
+Deployed an AWS cloud environment using a dedicated VPC, public and private subnets, and Amazon Linux EC2 instances.
 
-- Amazon EC2
-- Virtual Private Cloud (VPC)
-- Subnets
-- Security groups
-- Linux cloud instances
-- SSH administration
-- IAM concepts
-- Cloud networking concepts
+### Skills Demonstrated
 
-AWS is included as a supporting component of the overall infrastructure lab while the primary focus of this repository remains Linux administration and networking.
+- AWS VPC configuration
+- Public and private subnet design
+- CIDR addressing and subnetting
+- EC2 instance deployment
+- Amazon Linux administration
+- Internet Gateway configuration
+- AWS route tables
+- Amazon S3 Gateway Endpoint
+- SSH bastion-host administration
+- AWS security groups
+- IAM roles
+- IMDSv2 instance metadata security
+- Cloud networking and troubleshooting
 
+The environment includes two EC2 instances deployed across separate Availability Zones.
+
+The public instance provides an SSH administration entry point, while the private instance operates without a public IPv4 address.
+
+The documentation includes AWS Console screenshots verifying the VPC resource map, subnet architecture, EC2 deployment, instance status, and public IPv4 assignments.
 ---
 
 # Hardware
